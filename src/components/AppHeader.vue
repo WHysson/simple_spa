@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <div>
       <v-navigation-drawer temporary v-model="drawer" class="hidden-md-and-up">
           <v-list v-for="item in menuItems" :key="item.title" >
               <v-list-item>{{item.title}}</v-list-item>
@@ -13,7 +13,7 @@
               <v-btn :to="item.route" text><v-icon left v-html="item.icon"></v-icon>{{item.title}}</v-btn>
           </v-item-group>
       </v-app-bar>
-  </v-app>
+  </div>
 </template>
 
 <script>
@@ -35,6 +35,11 @@ export default {
                     title: 'Services',
                     route: '/services',
                     icon: 'list'
+                },
+                {
+                    title: 'Products',
+                    route: '/products',
+                    icon: 'shopping_basket'
                 },
                 {
                     title: 'Profile',
