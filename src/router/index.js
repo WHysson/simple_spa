@@ -1,11 +1,11 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import Services from '@/components/Services.vue'
-import Products from '@/components/Products.vue'
-import Signin from '@/components/Signin.vue'
-import Signup from '@/components/Signup.vue'
-import Profile from '@/components/Profile.vue'
+import Services from '../views/Services.vue'
+import Products from '../views/Products.vue'
+import Signin from '../views/Signin.vue'
+import Signup from '../views/Signup.vue'
+import Profile from '../views/Profile.vue'
 
 Vue.use(VueRouter)
 

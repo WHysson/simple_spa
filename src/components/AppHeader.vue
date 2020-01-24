@@ -1,13 +1,15 @@
 <template>
   <div>
-      <v-navigation-drawer temporary v-model="drawer" class="hidden-md-and-up">
+      <v-navigation-drawer v-model="drawer" class="hidden-md-and-up">
           <v-list v-for="item in menuItems" :key="item.title" >
               <v-list-item>{{item.title}}</v-list-item>
           </v-list>
       </v-navigation-drawer>
       <v-app-bar app dark class="primary">
           <v-app-bar-nav-icon @click.stop="drawer = !drawer" class="hidden-md-and-up"></v-app-bar-nav-icon>
-          <v-toolbar-title>A CUT OF ART</v-toolbar-title>
+          <router-link style="cursor: pointer" to="/home" tag="span">
+              <v-toolbar-title id="title" v-text="'A CUT OF ART'"></v-toolbar-title>
+          </router-link>
           <v-spacer></v-spacer>
           <v-item-group v-for="item in menuItems" :key="item.title" class="hidden-sm-and-down">
               <v-btn :to="item.route" text><v-icon left v-html="item.icon"></v-icon>{{item.title}}</v-btn>
