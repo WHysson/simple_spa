@@ -27,9 +27,23 @@ export default {
                 commit('set_processing', false)
                 commit('set_error', errorMessage)
               });
-        }
+        },
+        signin({commit}, payload){
+            commit('set_processing', true)
+            firebase.auth().signInWithEmailAndPassword(payload.email, payload.password)
+            .then(user => {
+                commit('set_user', user.uid)
+                commit('set_processing', false)
+            })
+            .catch(function(error) {
+                // Handle Errors here.
+                var errorMessage = error.message;
+                commit('set_processing', false)
+                commit('set_error', errorMessage)
+              });
+        },
     },
     getters:{
-        isAuthenticated: (state) => state.user.isAuthenticated
+        isUserAuthenticated: (state) => state.user.isAuthenticated
     }
   }

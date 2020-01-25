@@ -96,14 +96,14 @@ export default {
     processing(){
       return this.$store.getters.getProcessing
     },
-    isUserAutheticated(){
-      return this.$store.getters.isUserAutheticated
+    isUserAuthenticated(){
+      return this.$store.getters.isUserAuthenticated
     }
   },
   watch:{
-    isUserAutheticated(val){
-      if(val === true){
-        this.$router("/")
+    isUserAuthenticated(value){
+      if(value === true){
+        this.$router.push("/")
       }
     }
   }
