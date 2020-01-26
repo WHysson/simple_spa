@@ -14,6 +14,7 @@
           <v-item-group v-for="item in menuItems" :key="item.title" class="hidden-sm-and-down">
               <v-btn :to="item.route" text><v-icon left v-html="item.icon"></v-icon>{{item.title}}</v-btn>
           </v-item-group>
+          <v-btn v-if="isUserAuthenticated"  text @click.prevent="signout"><v-icon left >exit_to_app</v-icon>Log out</v-btn>
       </v-app-bar>
   </div>
 </template>
@@ -32,7 +33,6 @@ export default {
         menuItems(){
 
             if(this.isUserAuthenticated){
-                alert("Authorisation successfull!")
                 return [
                 {
                     title: 'Home',
@@ -54,12 +54,7 @@ export default {
                     route: '/profile',
                     icon: 'badge'
                 },
-                {
-                    title: 'Log out',
-                    route: '/logout',
-                    icon: 'exit_to_app'
-                },
-            ] 
+            ]
             }else {
                 return [
                 {
@@ -89,6 +84,11 @@ export default {
                 },
             ] 
             }
+        }
+    },
+    methods:{
+        signout(){
+            this.$store.dispatch('signout')
         }
     }
 

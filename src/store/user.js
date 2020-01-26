@@ -11,14 +11,18 @@ export default {
         set_user(state, payload){
             state.user.isAuthenticated = true
             state.user.uid = payload
+        },
+        unset_user(state, payload){
+            state.user.isAuthenticated = false
+            payload.uid = null
         }
     },
     actions: {
         signup({commit}, payload){
             commit('set_processing', true)
+            commit('clean_error')
             firebase.auth().createUserWithEmailAndPassword(payload.email, payload.password)
-            .then(user => {
-                commit('set_user', user.uid)
+            .then(() => {
                 commit('set_processing', false)
             })
             .catch(function(error) {
@@ -30,9 +34,9 @@ export default {
         },
         signin({commit}, payload){
             commit('set_processing', true)
+            commit('clean_error')
             firebase.auth().signInWithEmailAndPassword(payload.email, payload.password)
-            .then(user => {
-                commit('set_user', user.uid)
+            .then(() => {
                 commit('set_processing', false)
             })
             .catch(function(error) {
@@ -42,6 +46,16 @@ export default {
                 commit('set_error', errorMessage)
               });
         },
+        signout(){
+            firebase.auth().signOut()
+        },
+        state_changed({commit}, payload){
+            if(payload){
+                commit('set_user', payload.uid)
+            }else {
+                commit('unset_user')
+            }
+        }
     },
     getters:{
         isUserAuthenticated: (state) => state.user.isAuthenticated

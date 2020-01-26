@@ -23,7 +23,7 @@
                 <v-spacer />
               </v-toolbar>
               <v-card-text>
-                <v-form>
+                <v-form v-model= "valid">
                   <v-text-field
                     :rules="checkEmail"
                     id="email"
@@ -48,7 +48,7 @@
               </v-card-text>
               <v-card-actions>
                 <v-spacer />
-                <v-btn color="primary" @click.prevent="signup" :disabled="processing">Sign up</v-btn>
+                <v-btn color="primary" @click.prevent="signup" :disabled="processing || !valid">Sign up</v-btn>
               </v-card-actions>
             </v-card>
           </v-col>
@@ -64,6 +64,7 @@ export default {
       login: null,
       email: null,
       password: null,
+      valid: false,
       checkEmail: [
         value => !!value || 'Required.',
         value => {

@@ -23,8 +23,9 @@
                 <v-spacer />
               </v-toolbar>
               <v-card-text>
-                <v-form>
+                <v-form v-model="valid">
                   <v-text-field
+                    :rules="checkEmail"
                     id="email"
                     label="email"
                     name="email"
@@ -34,6 +35,7 @@
                   />
 
                   <v-text-field
+                    :rules="checkPassword"
                     id="password"
                     label="Password"
                     name="password"
@@ -46,7 +48,7 @@
               </v-card-text>
               <v-card-actions>
                 <v-spacer />
-                <v-btn color="primary" @click.prevent="signin" :disabled="processing">Sign in</v-btn>
+                <v-btn color="primary" @click.prevent="signin" :disabled="processing || !valid">Sign in</v-btn>
               </v-card-actions>
             </v-card>
           </v-col>
@@ -61,6 +63,22 @@ export default {
     return {
       email: null,
       password: null,
+      valid: false,
+      checkEmail: [
+        value => !!value || 'Required.',
+        value => {
+          const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+          return pattern.test(value) || 'Invalid e-mail.'
+        },
+      ],
+      checkPassword: [
+        value => !!value || 'Required.',
+        value => (value || '').length >= 6 || 'Min 6 characters',
+        value => {
+          const pattern = /(?=.*[a-z])[0-9a-zA-Z!@#$%^&*]{6,}/g
+          return pattern.test(value) || 'Invalid password.'
+        },
+      ]
     }
   },
   props: {
