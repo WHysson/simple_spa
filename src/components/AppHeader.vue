@@ -26,8 +26,14 @@ export default {
             }
         },
     computed:{
+        isUserAuthenticated(){
+            return this.$store.getters.isUserAuthenticated
+    },
         menuItems(){
-            return [
+
+            if(this.isUserAuthenticated){
+                alert("Authorisation successfull!")
+                return [
                 {
                     title: 'Home',
                     route: '/home',
@@ -53,6 +59,24 @@ export default {
                     route: '/logout',
                     icon: 'exit_to_app'
                 },
+            ] 
+            }else {
+                return [
+                {
+                    title: 'Home',
+                    route: '/home',
+                    icon: 'home'
+                },
+                {
+                    title: 'Services',
+                    route: '/services',
+                    icon: 'list'
+                },
+                {
+                    title: 'Products',
+                    route: '/products',
+                    icon: 'shopping_basket'
+                },
                 {
                     title: 'Sign in',
                     route: '/signin',
@@ -63,7 +87,8 @@ export default {
                     route: '/signup',
                     icon: 'lock_open'
                 },
-            ]
+            ] 
+            }
         }
     }
 
