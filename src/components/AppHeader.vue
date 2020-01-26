@@ -88,7 +88,11 @@ export default {
     },
     methods:{
         signout(){
-            this.$store.dispatch('signout')
+            this.$confirm('Do you really want to exit?').then(res => {
+                if (res) {
+                    this.$store.dispatch('signout')
+                }
+            })
         }
     }
 

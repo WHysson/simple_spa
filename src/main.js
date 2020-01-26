@@ -6,6 +6,18 @@ import vuetify from './plugins/vuetify'
 import 'material-design-icons-iconfont/dist/material-design-icons.css';
 import firebase from 'firebase'
 import firebaseConfig from '@/config/firebase.js'
+import VuetifyConfirm from 'vuetify-confirm'
+
+
+Vue.use(VuetifyConfirm, { 
+vuetify, 
+buttonTrueText: 'Accept',
+buttonFalseText: 'Discard',
+color: 'warning',
+icon: 'warning',
+title: 'Warning',
+width: 350,
+property: '$confirm'})
 
 Vue.config.productionTip = false
   firebase.initializeApp(firebaseConfig);

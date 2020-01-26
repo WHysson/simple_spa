@@ -6,12 +6,15 @@ import Products from '../views/Products.vue'
 import Signin from '../views/Signin.vue'
 import Signup from '../views/Signup.vue'
 import Profile from '../views/Profile.vue'
+import Store from '../store'
 
 Vue.use(VueRouter)
 
 
 const router = new VueRouter({
   mode: 'history',
+
+  
   
   routes: [
     {
@@ -42,9 +45,18 @@ const router = new VueRouter({
     {
       path: '/profile',
       name: 'profile',
-      component: Profile
+      component: Profile,
+      beforeEnter: AuthGuard
     }
   ]
 })
+
+function AuthGuard(from, to, next) {
+    if(Store.getters.isUserAuthenticated){
+      next()
+    }else {
+      next('/signin')
+    }
+}
 
 export default router
