@@ -23,6 +23,9 @@
                 <v-spacer />
               </v-toolbar>
               <v-card-text>
+                <v-alert :value="error" type="warning">
+                  {{error}}
+                </v-alert>
                 <v-form v-model= "valid">
                   <v-text-field
                     :rules="checkEmail"
@@ -89,6 +92,7 @@ export default {
     signup(){
       this.$store.dispatch('signup', {email:this.email, password:this.password})
     },
+    
   },
   computed:{
     error(){

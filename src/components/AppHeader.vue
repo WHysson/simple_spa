@@ -1,9 +1,25 @@
 <template>
   <div>
-      <v-navigation-drawer v-model="drawer" class="hidden-md-and-up">
-          <v-list v-for="item in menuItems" :key="item.title" >
-              <v-list-item>{{item.title}}</v-list-item>
-          </v-list>
+      <v-navigation-drawer temporary absolute v-model="drawer" class="hidden-md-and-up">
+          <v-list
+        dense
+        nav
+      >
+        <v-list-item
+          v-for="item in menuItems"
+          :key="item.title"
+          link
+          :to="item.route"
+        >
+          <v-list-item-icon>
+            <v-icon>{{ item.icon }}</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+            <v-list-item-title>{{ item.title }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
       </v-navigation-drawer>
       <v-app-bar app dark class="primary">
           <v-app-bar-nav-icon @click.stop="drawer = !drawer" class="hidden-md-and-up"></v-app-bar-nav-icon>

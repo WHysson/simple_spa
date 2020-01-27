@@ -24,6 +24,9 @@
               </v-toolbar>
               <v-card-text>
                 <v-form v-model="valid">
+                  <v-alert :value="error" type="warning">
+                  {{error}}
+                </v-alert>
                   <v-text-field
                     :rules="checkEmail"
                     id="email"

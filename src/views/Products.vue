@@ -1,10 +1,15 @@
 <template>
-  <h1>Products</h1>
+  <ProductList/>
 </template>
 
 <script>
-export default {
 
+import ProductList from '../components/ProductList'
+
+export default {
+  components: {
+    ProductList
+  }
 }
 </script>
 
